@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
-public class Vec {
+public final class Vec {
 
 	
-	private final double vec[];
+	protected final double vec[];
 
 	/**
 	 * Creates a Vec with the dimension {@code dimension}
