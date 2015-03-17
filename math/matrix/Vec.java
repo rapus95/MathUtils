@@ -293,16 +293,16 @@ public final class Vec implements IVec {
 		return vec;
 	}
 
-	public Vec randomIfPoint() {
+	public Vec normalizeRandomIfPoint() {
 		if (pMul(2) != 0)
-			return this;
+			return this.normalize();
 		Vec dest = new Vec(this.getDimensionCount());
 		for (int i = 0; i < dest.getDimensionCount(); i++) {
 			dest.setComponent(i, Math.random() * 2 - 1);
 		}
 		if (dest.getDimensionCount() > 0 && dest.pMul(2) == 0)
 			dest.setComponent(0, 1);
-		return dest;
+		return dest.normalize();
 	}
 
 	public static Vec fromPolarVec(PolarVec x) {

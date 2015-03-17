@@ -55,10 +55,6 @@ public class Mat {
         return mat[row][col];
     }
 
-    public Mat rotate(double degree) {
-        throw new UnsupportedOperationException("Not yet implemented!!!!");
-    }
-
     public static Mat makeRotMat(double degree, double... axis) {
         Mat m = new Mat(axis.length, axis.length);
         if (degree != 0)
