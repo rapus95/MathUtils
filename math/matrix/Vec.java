@@ -86,7 +86,7 @@ public final class Vec implements IVec {
 		return tmp;
 	}
 
-	public IVec cross(Vec other) {
+	public Vec cross(Vec other) {
 		if (this.getDimensionCount() != 3 || other.getDimensionCount() != 3)
 			return null;
 		return new Vec(this.vec[0] * other.vec[2] - this.vec[2] * other.vec[1], this.vec[2] * other.vec[0] - this.vec[0] * other.vec[2], this.vec[0] * other.vec[1] - this.vec[1] * other.vec[0]);
@@ -132,7 +132,7 @@ public final class Vec implements IVec {
 		return this.div(this.pNorm(2) / targetLength);
 	}
 
-	public IVec add(double val) {
+	public Vec add(double val) {
 		Vec dest = new Vec(this);
 		for (int row = 0; row < dest.vec.length; row++) {
 			dest.vec[row] += val;
@@ -194,7 +194,7 @@ public final class Vec implements IVec {
 		return array;
 	}
 
-	public IVec clone() {
+	public Vec clone() {
 		return new Vec(this);
 	}
 
@@ -211,7 +211,7 @@ public final class Vec implements IVec {
 		return other.sub(this).pMul(2) < dist * dist;
 	}
 
-	public boolean withinRectangle(IVec a, IVec b) {
+	public boolean withinRectangle(Vec a, Vec b) {
 		if (this.getDimensionCount() != a.getDimensionCount() || this.getDimensionCount() != b.getDimensionCount() || a.getDimensionCount() != b.getDimensionCount())
 			throw new IllegalArgumentException("In order to compare Vectors they have to be of the same dimension!");
 		double left, right, curr;
@@ -225,7 +225,7 @@ public final class Vec implements IVec {
 		return true;
 	}
 
-	public static IVec createVectorFromConsole() {
+	public static Vec createVectorFromConsole() {
 		Scanner s = new Scanner(System.in);
 		System.out.println("What Dimension shall the Vector have?");
 		Vec v = new Vec(s.nextInt());
@@ -235,7 +235,7 @@ public final class Vec implements IVec {
 		return v;
 	}
 
-	public static IVec createVectorFromConsole(int dimension) {
+	public static Vec createVectorFromConsole(int dimension) {
 		Scanner s = new Scanner(System.in);
 		Vec v = new Vec(dimension);
 		v.readVectorFromConsole(s);
@@ -247,7 +247,7 @@ public final class Vec implements IVec {
 		return new Vec(x);
 	}
 
-	public IVec readVectorFromConsole(Scanner s) {
+	public Vec readVectorFromConsole(Scanner s) {
 		System.out.println("Enter " + this.getDimensionCount() + " coordinates (as doubles) seperated by spaces.");
 		String[] input = s.nextLine().split(" ");
 		if (input.length != this.getDimensionCount()) {
