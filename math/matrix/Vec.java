@@ -243,7 +243,7 @@ public final class Vec implements IVec {
 		return v;
 	}
 
-	public static IVec fromList(double... x) {
+	public static Vec fromList(double... x) {
 		return new Vec(x);
 	}
 
