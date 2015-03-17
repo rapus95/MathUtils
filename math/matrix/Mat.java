@@ -188,7 +188,7 @@ public class Mat {
         }
     }
     
-    public static Vec solve(Mat a, Vec b, double omega, double epsilon){
+    public static IVec solve(Mat a, IVec b, double omega, double epsilon){
         int n;
         if(a.getColums()!=(n=a.getRows())) throw new IllegalArgumentException("expected a square-matrix");
         if(b.getDimensionCount()!=n) throw new IllegalArgumentException("expeted the given vector to be of length n");

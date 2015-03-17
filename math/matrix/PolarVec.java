@@ -3,12 +3,10 @@ package math.matrix;
 import java.util.Arrays;
 import java.util.Comparator;
 
-public class PolarVec {
-	
-	
+public final class PolarVec implements IVec {
+
 	/**
-	 * First element is the length of the vector
-	 * every other is the i-th angle
+	 * First element is the length of the vector every other is the i-th angle
 	 */
 	protected final double vec[];
 
@@ -70,6 +68,10 @@ public class PolarVec {
 	}
 
 	public void setComponent(int dim, double val) {
+		if(dim>0){
+			while (val <= -Math.PI) val += 2*Math.PI;
+		    while (val > Math.PI) val -= 2*Math.PI;
+		}
 		this.vec[dim] = val;
 	}
 
@@ -95,7 +97,7 @@ public class PolarVec {
 
 	public PolarVec mul(double val) {
 		PolarVec dest = new PolarVec(this);
-		dest.vec[0]*=val;
+		dest.vec[0] *= val;
 		return dest;
 	}
 
@@ -124,11 +126,9 @@ public class PolarVec {
 		return "PolarVec [vec=" + Arrays.toString(this.vec) + "]";
 	}
 
-	public static PolarVec from(double... x) {
+	public static PolarVec fromList(double... x) {
 		return new PolarVec(x);
 	}
-	
-
 
 	public static class EulerianComparator implements Comparator<PolarVec> {
 		private final boolean checkDimension;
@@ -154,6 +154,46 @@ public class PolarVec {
 				return (int) Math.signum(o1.length() - o2.length());
 		}
 
+	}
+
+	public static PolarVec fromVec(Vec x) {
+		double tmpFirstAngle;
+		if (x.getDimensionCount() < 2 || (tmpFirstAngle = x.pMul(2)) == 0)
+			return new PolarVec(x.vec);
+		PolarVec dest = new PolarVec(x.getDimensionCount());
+		int index = dest.getDimensionCount() - 1;
+		boolean onlyZeros = x.vec[index] == 0;
+		double sum = x.vec[index] * x.vec[index] + x.vec[index - 1] * x.vec[index - 1];
+		if (onlyZeros && x.vec[index - 1] == 0) {
+			dest.vec[index] = 0;
+		} else {
+			onlyZeros = false;
+			if (x.vec[index] >= 0) {
+				dest.vec[index] = Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+			} else {
+				dest.vec[index] = 2 * Math.PI - Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+			}
+		}
+		for (index--; index >= 2; index--) {
+			if ((onlyZeros && x.vec[index - 1] == 0)) {
+				dest.vec[index] = 0;
+			} else {
+				sum += x.vec[index - 1] * x.vec[index - 1];
+				if (onlyZeros) {
+					onlyZeros = false;
+					dest.vec[index] = x.vec[index - 1] > 0 ? 0 : Math.PI;
+				} else {
+					dest.vec[index] = Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+				}
+			}
+		}
+		dest.vec[0] = Math.sqrt(tmpFirstAngle);
+		dest.vec[1] = Math.acos(x.vec[0] / dest.vec[0]);
+		return dest;
+	}
+	
+	public Vec toVec(){
+		return Vec.fromPolarVec(this);
 	}
 
 }
