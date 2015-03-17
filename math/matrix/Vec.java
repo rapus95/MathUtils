@@ -1,5 +1,8 @@
 package math.matrix;
 
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.DoubleBuffer;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
@@ -89,7 +92,7 @@ public final class Vec implements IVec {
 	public Vec cross(Vec other) {
 		if (this.getDimensionCount() != 3 || other.getDimensionCount() != 3)
 			return null;
-		return new Vec(this.vec[0] * other.vec[2] - this.vec[2] * other.vec[1], this.vec[2] * other.vec[0] - this.vec[0] * other.vec[2], this.vec[0] * other.vec[1] - this.vec[1] * other.vec[0]);
+		return new Vec(this.vec[1] * other.vec[2] - this.vec[2] * other.vec[1], this.vec[2] * other.vec[0] - this.vec[0] * other.vec[2], this.vec[0] * other.vec[1] - this.vec[1] * other.vec[0]);
 	}
 
 	/**
@@ -321,5 +324,31 @@ public final class Vec implements IVec {
 	
 	public PolarVec toPolarVec(){
 		return PolarVec.fromVec(this);
+	}
+
+
+	
+	private static final Mat YZSWAP = new Mat(3,3);
+	
+	static{
+		YZSWAP.setIdentity(0);
+		YZSWAP.setValue(0, 0, 1);
+		YZSWAP.setValue(2, 1, 1);
+		YZSWAP.setValue(1, 2, 1);
+	}
+	
+	private static DoubleBuffer tmpBuffer = null; 
+	public DoubleBuffer asTmpDoubleBuffer(boolean yzSwap) {
+		if(tmpBuffer==null){
+			tmpBuffer = ByteBuffer.allocateDirect(4*8).order(ByteOrder.nativeOrder()).asDoubleBuffer();
+		}
+		if(yzSwap){
+			Vec nw = YZSWAP.mul(this);
+			tmpBuffer.put(nw.vec);
+		}else{
+			tmpBuffer.put(vec);
+		}
+		tmpBuffer.position(0);
+		return tmpBuffer;
 	}
 }
