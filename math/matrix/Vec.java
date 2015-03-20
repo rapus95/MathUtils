@@ -146,8 +146,24 @@ public final class Vec implements IVec {
 	public Vec add(Vec other) {
 		return addWithMultiplier(other, 1);
 	}
+	
+	public Vec addZeroIfNull(Vec other) {
+		return addWithMultiplierAndZeroIfNull(other, 1);
+	}
 
 	public Vec addWithMultiplier(Vec other, double multiplier) {
+		if (this.getDimensionCount() != other.getDimensionCount())
+			throw new IllegalArgumentException("In order to add two Vectors they have to be of the same dimension!");
+		Vec dest = new Vec(this);
+		for (int row = 0; row < dest.vec.length; row++) {
+			dest.vec[row] += other.vec[row] * multiplier;
+		}
+		return dest;
+	}
+	
+	public Vec addWithMultiplierAndZeroIfNull(Vec other, double multiplier) {
+		if(other==null || multiplier==0)
+			return this.clone();
 		if (this.getDimensionCount() != other.getDimensionCount())
 			throw new IllegalArgumentException("In order to add two Vectors they have to be of the same dimension!");
 		Vec dest = new Vec(this);
@@ -295,6 +311,18 @@ public final class Vec implements IVec {
 		}
 		return vec;
 	}
+	
+	public static Vec mixFromHighestComponents(int dim, Vec... vecs) {
+		Vec ret = new Vec(dim);
+		for(int i=0; i<vecs.length; i++){
+			if(vecs[i]==null || vecs[i].getDimensionCount()!=dim)
+				continue;
+			for(int j=0; j<dim; j++){
+				ret.vec[j] = Math.abs(ret.vec[j])>Math.abs(vecs[i].vec[j])?ret.vec[j]:vecs[i].vec[j];
+			}
+		}
+		return ret;
+	}
 
 	public Vec normalizeRandomIfPoint() {
 		if (pMul(2) != 0)
@@ -351,4 +379,5 @@ public final class Vec implements IVec {
 		tmpBuffer.position(0);
 		return tmpBuffer;
 	}
+	
 }
