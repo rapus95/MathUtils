@@ -4,8 +4,8 @@ public interface IVec {
 
 	int getDimensionCount();
 
-	void setComponent(int dim, double val);
+	void set(int dim, double val);
 
-	double getComponent(int dim);
+	double get(int dim);
 
 }

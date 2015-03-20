@@ -65,12 +65,16 @@ public final class Vec implements IVec {
 	}
 
 	@Override
-	public double getComponent(int dim) {
+	public double get(int dim) {
 		return vec[dim];
+	}
+	
+	public int getInt(int dim) {
+		return (int)Math.round(vec[dim]);
 	}
 
 	@Override
-	public void setComponent(int dim, double val) {
+	public void set(int dim, double val) {
 		this.vec[dim] = val;
 	}
 
@@ -132,7 +136,7 @@ public final class Vec implements IVec {
 			return this.mul(targetLength);
 		if (currentLength == 0 || targetLength == 0)
 			return new Vec(this);
-		return this.div(this.pNorm(2) / targetLength);
+		return this.div(currentLength / targetLength);
 	}
 
 	public Vec add(double val) {
@@ -235,9 +239,9 @@ public final class Vec implements IVec {
 			throw new IllegalArgumentException("In order to compare Vectors they have to be of the same dimension!");
 		double left, right, curr;
 		for (int i = 0; i < this.getDimensionCount(); i++) {
-			left = a.getComponent(i);
-			right = b.getComponent(i);
-			curr = this.getComponent(i);
+			left = a.get(i);
+			right = b.get(i);
+			curr = this.get(i);
 			if ((left > curr || curr > right) && (right > curr || curr > left))
 				return false;
 		}
@@ -329,10 +333,10 @@ public final class Vec implements IVec {
 			return this.normalize();
 		Vec dest = new Vec(this.getDimensionCount());
 		for (int i = 0; i < dest.getDimensionCount(); i++) {
-			dest.setComponent(i, Math.random() * 2 - 1);
+			dest.set(i, Math.random() * 2 - 1);
 		}
 		if (dest.getDimensionCount() > 0 && dest.pMul(2) == 0)
-			dest.setComponent(0, 1);
+			dest.set(0, 1);
 		return dest.normalize();
 	}
 
@@ -367,8 +371,8 @@ public final class Vec implements IVec {
 	
 	private static DoubleBuffer tmpBuffer = null; 
 	public DoubleBuffer asTmpDoubleBuffer(boolean yzSwap) {
-		if(tmpBuffer==null){
-			tmpBuffer = ByteBuffer.allocateDirect(4*8).order(ByteOrder.nativeOrder()).asDoubleBuffer();
+		if(tmpBuffer==null || tmpBuffer.capacity()<vec.length){
+			tmpBuffer = ByteBuffer.allocateDirect(vec.length*8).order(ByteOrder.nativeOrder()).asDoubleBuffer();
 		}
 		if(yzSwap){
 			Vec nw = YZSWAP.mul(this);

@@ -63,11 +63,11 @@ public final class PolarVec implements IVec {
 		this(vec.getDimensionCount(), vec.vec);
 	}
 
-	public double getComponent(int dim) {
+	public double get(int dim) {
 		return vec[dim];
 	}
 
-	public void setComponent(int dim, double val) {
+	public void set(int dim, double val) {
 		if(dim>0){
 			while (val <= -Math.PI) val += 2*Math.PI;
 		    while (val > Math.PI) val -= 2*Math.PI;
@@ -91,7 +91,7 @@ public final class PolarVec implements IVec {
 		if (vec[0] == 0 || vec[0] == 0)
 			return new PolarVec(this);
 		PolarVec dest = new PolarVec(this);
-		dest.setComponent(0, targetLength);
+		dest.set(0, targetLength);
 		return dest;
 	}
 
