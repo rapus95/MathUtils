@@ -1,4 +1,4 @@
-package math.Utils;
+package math.utils;
 
 public class MathUtils {
 

@@ -1,6 +1,6 @@
 package math.collision;
 
-import math.Utils.MathUtils;
+import math.utils.MathUtils;
 import math.vecmat.Vec;
 import math.vecmat.Vec2;
 import math.vecmat.Vec3;
@@ -77,19 +77,19 @@ public class Physics {
 		return null;
 	}
 
-	public static double intersectionPos(Vec2 gAp1, Vec2 gAp2, Vec2 gBp1, Vec2 gBp2) {
-		double x1 = gAp1.x(), x2 = gAp2.x(), x3 = gBp1.x(), x4 = gBp2.x();
-		double y1 = gAp1.y(), y2 = gAp2.y(), y3 = gBp1.y(), y4 = gBp2.y();
-		double xs1 = x2 - x1, xs2 = x4 - x3;
-		double ys1 = y2 - y1, ys2 = y4 - y3;
-		double t3 = ys2 * xs1 - xs2 * ys1;
-		if (t3 == 0)
-			return -1;
-		double t1 = x2 * y1 - x1 * y2;
-		double t2 = x4 * y3 - x3 * y4;
-		double x = (xs2 * t1 - xs1 * t2) / t3;
-		double y = (ys2 * t1 - ys1 * t2) / t3;
-	}
+//	public static double intersectionPos(Vec2 gAp1, Vec2 gAp2, Vec2 gBp1, Vec2 gBp2) {
+//		double x1 = gAp1.x(), x2 = gAp2.x(), x3 = gBp1.x(), x4 = gBp2.x();
+//		double y1 = gAp1.y(), y2 = gAp2.y(), y3 = gBp1.y(), y4 = gBp2.y();
+//		double xs1 = x2 - x1, xs2 = x4 - x3;
+//		double ys1 = y2 - y1, ys2 = y4 - y3;
+//		double t3 = ys2 * xs1 - xs2 * ys1;
+//		if (t3 == 0)
+//			return -1;
+//		double t1 = x2 * y1 - x1 * y2;
+//		double t2 = x4 * y3 - x3 * y4;
+//		double x = (xs2 * t1 - xs1 * t2) / t3;
+//		double y = (ys2 * t1 - ys1 * t2) / t3;
+//	}
 
 	public static Vec2 intersection(Vec2 gAp1, Vec2 gAp2, Vec2 gBp1, Vec2 gBp2) {
 		double x1 = gAp1.x(), x2 = gAp2.x(), x3 = gBp1.x(), x4 = gBp2.x();
@@ -122,6 +122,6 @@ public class Physics {
 			return res;
 		if ((res = intersection(Vec.Vec2(), dir, C, A)) != null)
 			return res;
-
+		return null;
 	}
 }
