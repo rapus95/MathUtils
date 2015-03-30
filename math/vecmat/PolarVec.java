@@ -1,9 +1,9 @@
-package math.matrix;
+package math.vecmat;
 
 import java.util.Arrays;
 import java.util.Comparator;
 
-public final class PolarVec implements IVec {
+public final class PolarVec {
 
 	/**
 	 * First element is the length of the vector every other is the i-th angle
@@ -60,7 +60,7 @@ public final class PolarVec implements IVec {
 	 *            the Vec to copy
 	 */
 	public PolarVec(PolarVec vec) {
-		this(vec.getDimensionCount(), vec.vec);
+		this(vec.dim(), vec.vec);
 	}
 
 	public double get(int dim) {
@@ -75,7 +75,7 @@ public final class PolarVec implements IVec {
 		this.vec[dim] = val;
 	}
 
-	public int getDimensionCount() {
+	public int dim() {
 		return vec.length;
 	}
 
@@ -103,14 +103,14 @@ public final class PolarVec implements IVec {
 
 	public PolarVec div(double val) {
 		if (val == 0)
-			return new PolarVec(getDimensionCount());
+			return new PolarVec(dim());
 		PolarVec dest = new PolarVec(this);
 		dest.vec[0] /= val;
 		return dest;
 	}
 
 	public double[] toArray() {
-		double[] array = new double[getDimensionCount()];
+		double[] array = new double[dim()];
 		for (int i = 0; i < array.length; i++) {
 			array[i] = vec[i];
 		}
@@ -148,7 +148,7 @@ public final class PolarVec implements IVec {
 			if (o2 == null)
 				return 1;
 			int dimDif;
-			if (checkDimension && (dimDif = o1.getDimensionCount() - o2.getDimensionCount()) != 0)
+			if (checkDimension && (dimDif = o1.dim() - o2.dim()) != 0)
 				return dimDif;
 			else
 				return (int) Math.signum(o1.length() - o2.length());
@@ -156,44 +156,62 @@ public final class PolarVec implements IVec {
 
 	}
 
-	public static PolarVec fromVec(Vec x) {
+	public static PolarVec fromVec(Vec<?> x) {
 		double tmpFirstAngle;
-		if (x.getDimensionCount() < 2 || (tmpFirstAngle = x.pMul(2)) == 0)
-			return new PolarVec(x.vec);
-		PolarVec dest = new PolarVec(x.getDimensionCount());
-		int index = dest.getDimensionCount() - 1;
-		boolean onlyZeros = x.vec[index] == 0;
-		double sum = x.vec[index] * x.vec[index] + x.vec[index - 1] * x.vec[index - 1];
-		if (onlyZeros && x.vec[index - 1] == 0) {
+		if (x.dim() < 2 || (tmpFirstAngle = x.pMul(2)) == 0)
+			return new PolarVec(x.toArray());
+		PolarVec dest = new PolarVec(x.dim());
+		int index = dest.dim() - 1;
+		boolean onlyZeros = x.get(index) == 0;
+		double xi = x.get(index);
+		double xim1 = x.get(index-1);
+		double sum = xi * xi + xim1 * xim1;
+		if (onlyZeros && xim1 == 0) {
 			dest.vec[index] = 0;
 		} else {
 			onlyZeros = false;
-			if (x.vec[index] >= 0) {
-				dest.vec[index] = Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+			if (xi >= 0) {
+				dest.vec[index] = Math.acos(xim1 / Math.sqrt(sum));
 			} else {
-				dest.vec[index] = 2 * Math.PI - Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+				dest.vec[index] = 2 * Math.PI - Math.acos(xim1 / Math.sqrt(sum));
 			}
 		}
 		for (index--; index >= 2; index--) {
-			if ((onlyZeros && x.vec[index - 1] == 0)) {
+			xim1 = x.get(index-1);
+			if ((onlyZeros && xim1 == 0)) {
 				dest.vec[index] = 0;
 			} else {
-				sum += x.vec[index - 1] * x.vec[index - 1];
+				sum += xim1 * xim1;
 				if (onlyZeros) {
 					onlyZeros = false;
-					dest.vec[index] = x.vec[index - 1] > 0 ? 0 : Math.PI;
+					dest.vec[index] = xim1 > 0 ? 0 : Math.PI;
 				} else {
-					dest.vec[index] = Math.acos(x.vec[index - 1] / Math.sqrt(sum));
+					dest.vec[index] = Math.acos(xim1 / Math.sqrt(sum));
 				}
 			}
 		}
 		dest.vec[0] = Math.sqrt(tmpFirstAngle);
-		dest.vec[1] = Math.acos(x.vec[0] / dest.vec[0]);
+		dest.vec[1] = Math.acos(x.get(0) / dest.vec[0]);
 		return dest;
 	}
 	
-	public Vec toVec(){
-		return Vec.fromPolarVec(this);
+	public static <V extends Vec<V>> V VecXFromPolarVec(PolarVec x) {
+		if (x.dim() < 2 || x.length() == 0)
+			return Vec.VecX(x.vec);
+		final int size = x.dim();
+		V dest = Vec.VecX(size);
+		double beginningPart = x.vec[0];
+		int i = 1;
+		for (; i < size; i++) {
+			dest.set(i - 1, beginningPart * Math.cos(x.vec[i]));
+			beginningPart *= Math.sin(x.vec[i]);
+		}
+		dest.set(i - 1, beginningPart);
+		return dest;
+	}
+	
+	public <V extends Vec<V>> V toVec(){
+		return VecXFromPolarVec(this);
 	}
 
 }
