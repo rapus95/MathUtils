@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import math.vecmat.Operators.Func1;
-import math.vecmat.Operators.Func2;
-import math.vecmat.Operators.Func3;
+import math.utils.Operators;
+import math.utils.Operators.Func1;
+import math.utils.Operators.Func2;
+import math.utils.Operators.Func3;
 
 public abstract class Vec<T extends Vec<T>> implements Iterable<Double>, Cloneable {
 

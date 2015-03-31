@@ -7,9 +7,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import math.vecmat.Operators.Func1;
-import math.vecmat.Operators.Func2;
-import math.vecmat.Operators.Func3;
+import math.utils.Operators;
+import math.utils.Operators.Func1;
+import math.utils.Operators.Func2;
+import math.utils.Operators.Func3;
 
 public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements Cloneable {
 

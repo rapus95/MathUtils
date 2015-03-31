@@ -1,30 +1,30 @@
-package math.vecmat;
+package math.utils;
 
 
-final class Operators {
+public final class Operators {
 
 	private Operators() {
 	}
 
-	static interface Func1 {
+	public static interface Func1 {
 
 		public double calc(double f);
 
 	}
 
-	static interface Func2 {
+	public static interface Func2 {
 
 		public double calc(double f1, double f2);
 
 	}
 
-	static interface Func3 {
+	public static interface Func3 {
 
 		public double calc(double f1, double f2, double f3);
 
 	}
 
-	static final Func2 ADD = new Func2() {
+	public static final Func2 ADD = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -33,7 +33,7 @@ final class Operators {
 
 	};
 
-	static final Func2 SUB = new Func2() {
+	public static final Func2 SUB = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -42,7 +42,7 @@ final class Operators {
 
 	};
 
-	static final Func2 SUB2 = new Func2() {
+	public static final Func2 SUB2 = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -51,7 +51,7 @@ final class Operators {
 
 	};
 
-	static final Func1 NEG = new Func1() {
+	public static final Func1 NEG = new Func1() {
 
 		@Override
 		public double calc(double f1) {
@@ -60,7 +60,7 @@ final class Operators {
 
 	};
 
-	static final Func2 MUL = new Func2() {
+	public static final Func2 MUL = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -69,7 +69,7 @@ final class Operators {
 
 	};
 
-	static final Func2 DIV = new Func2() {
+	public static final Func2 DIV = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -78,7 +78,7 @@ final class Operators {
 
 	};
 
-	static final Func2 DIV2 = new Func2() {
+	public static final Func2 DIV2 = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -87,7 +87,7 @@ final class Operators {
 
 	};
 
-	static final Func2 MOD = new Func2() {
+	public static final Func2 MOD = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -96,7 +96,7 @@ final class Operators {
 
 	};
 
-	static final Func2 MOD2 = new Func2() {
+	public static final Func2 MOD2 = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -105,7 +105,7 @@ final class Operators {
 
 	};
 
-	static final Func2 POW = new Func2() {
+	public static final Func2 POW = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -114,7 +114,7 @@ final class Operators {
 
 	};
 
-	static final Func2 POW2 = new Func2() {
+	public static final Func2 POW2 = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -123,7 +123,7 @@ final class Operators {
 
 	};
 
-	static final Func1 RADIANS = new Func1() {
+	public static final Func1 RADIANS = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -132,7 +132,7 @@ final class Operators {
 
 	};
 
-	static final Func1 DEGREES = new Func1() {
+	public static final Func1 DEGREES = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -141,7 +141,7 @@ final class Operators {
 
 	};
 
-	static final Func1 SIN = new Func1() {
+	public static final Func1 SIN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -150,7 +150,7 @@ final class Operators {
 
 	};
 
-	static final Func1 COS = new Func1() {
+	public static final Func1 COS = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -159,7 +159,7 @@ final class Operators {
 
 	};
 
-	static final Func1 TAN = new Func1() {
+	public static final Func1 TAN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -168,7 +168,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ASIN = new Func1() {
+	public static final Func1 ASIN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -177,7 +177,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ACOS = new Func1() {
+	public static final Func1 ACOS = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -186,7 +186,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ATAN = new Func1() {
+	public static final Func1 ATAN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -195,7 +195,7 @@ final class Operators {
 
 	};
 
-	static final Func2 ATAN2 = new Func2() {
+	public static final Func2 ATAN2 = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -204,7 +204,7 @@ final class Operators {
 
 	};
 
-	static final Func1 SINH = new Func1() {
+	public static final Func1 SINH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -213,7 +213,7 @@ final class Operators {
 
 	};
 
-	static final Func1 COSH = new Func1() {
+	public static final Func1 COSH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -222,7 +222,7 @@ final class Operators {
 
 	};
 
-	static final Func1 TANH = new Func1() {
+	public static final Func1 TANH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -231,7 +231,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ASINH = new Func1() {
+	public static final Func1 ASINH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -240,7 +240,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ACOSH = new Func1() {
+	public static final Func1 ACOSH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -249,7 +249,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ATANH = new Func1() {
+	public static final Func1 ATANH = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -258,7 +258,7 @@ final class Operators {
 
 	};
 
-	static final Func1 EXP = new Func1() {
+	public static final Func1 EXP = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -267,7 +267,7 @@ final class Operators {
 
 	};
 
-	static final Func1 LOG = new Func1() {
+	public static final Func1 LOG = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -276,7 +276,7 @@ final class Operators {
 
 	};
 
-	static final Func1 EXP2 = new Func1() {
+	public static final Func1 EXP2 = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -285,7 +285,7 @@ final class Operators {
 
 	};
 
-	static final Func1 LOG2 = new Func1() {
+	public static final Func1 LOG2 = new Func1() {
 
 		public final double L2 = Math.log(2);
 
@@ -296,7 +296,7 @@ final class Operators {
 
 	};
 
-	static final Func1 SQRT = new Func1() {
+	public static final Func1 SQRT = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -305,7 +305,7 @@ final class Operators {
 
 	};
 
-	static final Func1 INVERSESQRT = new Func1() {
+	public static final Func1 INVERSESQRT = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -314,7 +314,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ABS = new Func1() {
+	public static final Func1 ABS = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -323,7 +323,7 @@ final class Operators {
 
 	};
 
-	static final Func1 SIGN = new Func1() {
+	public static final Func1 SIGN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -332,7 +332,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ROUNDEVEN = new Func1() {
+	public static final Func1 ROUNDEVEN = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -341,7 +341,7 @@ final class Operators {
 
 	};
 
-	static final Func1 ROUND = new Func1() {
+	public static final Func1 ROUND = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -350,7 +350,7 @@ final class Operators {
 
 	};
 
-	static final Func1 TRUNC = new Func1() {
+	public static final Func1 TRUNC = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -359,7 +359,7 @@ final class Operators {
 
 	};
 
-	static final Func1 FLOOR = new Func1() {
+	public static final Func1 FLOOR = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -368,7 +368,7 @@ final class Operators {
 
 	};
 
-	static final Func1 CEIL = new Func1() {
+	public static final Func1 CEIL = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -377,7 +377,7 @@ final class Operators {
 
 	};
 
-	static final Func1 FRACT = new Func1() {
+	public static final Func1 FRACT = new Func1() {
 
 		@Override
 		public double calc(double f) {
@@ -386,7 +386,7 @@ final class Operators {
 
 	};
 
-	static final Func2 MIN = new Func2() {
+	public static final Func2 MIN = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -395,7 +395,7 @@ final class Operators {
 
 	};
 
-	static final Func2 MAX = new Func2() {
+	public static final Func2 MAX = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -404,7 +404,7 @@ final class Operators {
 
 	};
 
-	static final Func3 CLAMP = new Func3() {
+	public static final Func3 CLAMP = new Func3() {
 
 		@Override
 		public double calc(double f1, double f2, double f3) {
@@ -413,7 +413,7 @@ final class Operators {
 
 	};
 
-	static final Func3 MIX = new Func3() {
+	public static final Func3 MIX = new Func3() {
 
 		@Override
 		public double calc(double f1, double f2, double f3) {
@@ -422,7 +422,7 @@ final class Operators {
 
 	};
 
-	static final Func2 STEP = new Func2() {
+	public static final Func2 STEP = new Func2() {
 
 		@Override
 		public double calc(double f1, double f2) {
@@ -431,7 +431,7 @@ final class Operators {
 
 	};
 
-	static final Func3 SMOOTHSTEP = new Func3() {
+	public static final Func3 SMOOTHSTEP = new Func3() {
 
 		@Override
 		public double calc(double f1, double f2, double f3) {

@@ -1,8 +1,8 @@
 package math.vecmat;
 
-import math.vecmat.Operators.Func1;
-import math.vecmat.Operators.Func2;
-import math.vecmat.Operators.Func3;
+import math.utils.Operators.Func1;
+import math.utils.Operators.Func2;
+import math.utils.Operators.Func3;
 
 public abstract class Vec4 extends Vec<Vec4> {
 
