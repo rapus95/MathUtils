@@ -1086,7 +1086,7 @@ public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements
 
 	public static Mat4 createPerspectiveMarix(double fovy, double aspect, double zNear, double zFar) {
 		RMat4 m = new RMat4();
-		double f = (double) (1 / Math.tan(Math.toRadians(fovy)));
+		double f = (double) (1 / Math.tan(Math.toRadians(fovy)/2));
 		m.mat[0] = f / aspect;
 		m.mat[5] = f;
 		m.mat[10] = (zNear + zFar) / (zNear - zFar);
