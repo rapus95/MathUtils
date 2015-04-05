@@ -315,10 +315,18 @@ public abstract class Mat4 extends Mat<Mat4, Mat4> {
 		return mul(createTranslationMarix(x, y, z));
 	}
 
+	public Mat4 rotate(double a, Vec3 axis) {
+		return mul(createRotationMarix(a, axis));
+	}
+	
 	public Mat4 rotate(double a, double x, double y, double z) {
 		return mul(createRotationMarix(a, x, y, z));
 	}
 
+	public Mat4 rotateRad(double a, Vec3 axis) {
+		return mul(createRotationMarixRad(a, axis));
+	}
+	
 	public Mat4 rotateRad(double a, double x, double y, double z) {
 		return mul(createRotationMarixRad(a, x, y, z));
 	}

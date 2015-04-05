@@ -1368,6 +1368,7 @@ public abstract class Vec<T extends Vec<T>> implements Iterable<Double>, Cloneab
 		return ret;
 	}
 
+	@SafeVarargs
 	public static <V extends Vec<V>> V mixFromHighestComponents(int dim, V... vecs) {
 		V ret = VecX(dim);
 		for (int i = 0; i < vecs.length; i++) {

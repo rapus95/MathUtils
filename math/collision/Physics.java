@@ -1,6 +1,5 @@
 package math.collision;
 
-import math.utils.MathUtils;
 import math.vecmat.Vec;
 import math.vecmat.Vec2;
 import math.vecmat.Vec3;

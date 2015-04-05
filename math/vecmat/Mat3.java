@@ -182,4 +182,20 @@ public abstract class Mat3 extends Mat<Mat3, Mat3> {
 		return new RMat3();
 	}
 
+	public Mat3 rotate(double a, Vec3 axis) {
+		return mul(createRotationMarix3(a, axis));
+	}
+	
+	public Mat3 rotate(double a, double x, double y, double z) {
+		return mul(createRotationMarix3(a, x, y, z));
+	}
+
+	public Mat3 rotateRad(double a, Vec3 axis) {
+		return mul(createRotationMarixRad3(a, axis));
+	}
+	
+	public Mat3 rotateRad(double a, double x, double y, double z) {
+		return mul(createRotationMarixRad3(a, x, y, z));
+	}
+	
 }

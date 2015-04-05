@@ -932,10 +932,18 @@ public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements
 		return m;
 	}
 
+	public static Mat4 createRotationMarix(double a, Vec3 axis){
+		return createRotationMarixRad((double) Math.toRadians(a), axis.x(), axis.y(), axis.z());
+	}
+	
 	public static Mat4 createRotationMarix(double a, double x, double y, double z) {
 		return createRotationMarixRad((double) Math.toRadians(a), x, y, z);
 	}
 
+	public static Mat4 createRotationMarixRad(double a, Vec3 axis){
+		return createRotationMarixRad(a, axis.x(), axis.y(), axis.z());
+	}
+	
 	public static Mat4 createRotationMarixRad(double a, double x, double y, double z) {
 		RMat4 m = new RMat4();
 		double c = (double) Math.cos(a);
@@ -963,10 +971,18 @@ public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements
 		return m;
 	}
 	
+	public static Mat3 createRotationMarix3(double a, Vec3 axis){
+		return createRotationMarixRad3((double) Math.toRadians(a), axis.x(), axis.y(), axis.z());
+	}
+	
 	public static Mat3 createRotationMarix3(double a, double x, double y, double z) {
 		return createRotationMarixRad3((double) Math.toRadians(a), x, y, z);
 	}
 
+	public static Mat3 createRotationMarixRad3(double a, Vec3 axis){
+		return createRotationMarixRad3(a, axis.x(), axis.y(), axis.z());
+	}
+	
 	public static Mat3 createRotationMarixRad3(double a, double x, double y, double z) {
 		RMat3 m = new RMat3();
 		double c = (double) Math.cos(a);
@@ -1041,6 +1057,10 @@ public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements
 		return m;
 	}
 
+	public static Mat4 createLookAtMatrix(Vec3 eye, Vec3 center, Vec3 up){
+		return createLookAtMatrix(eye.x(), eye.y(), eye.z(), center.x(), center.y(), center.z(), up.x(), up.y(), up.z());
+	}
+	
 	public static Mat4 createLookAtMatrix(double eyeX, double eyeY, double eyeZ, double centerX, double centerY, double centerZ, double upX, double upY, double upZ) {
 		RMat4 m = new RMat4();
 
