@@ -1389,6 +1389,23 @@ public abstract class Vec<T extends Vec<T>> implements Iterable<Double>, Cloneab
 		}
 		return ret;
 	}
+	
+	public static <V extends Vec<V>> V sumUp(int dim, V... vecs) {
+		V ret = VecX(dim);
+		for (int i = 0; i < vecs.length; i++) {
+			V v2 = vecs[i];
+			if (v2 == null)
+				continue;
+			if (Debug.DEBUG) {
+				if (v2.dim() != dim)
+					throw new IllegalArgumentException();
+			}
+			for (int j = 0; j < dim; j++) {
+				ret.set(j, ret.get(j)+v2.get(j));
+			}
+		}
+		return ret;
+	}
 
 	public static <V extends Vec<V>> V VecX(Object... o) {
 		List<Number> list = new ArrayList<Number>();
