@@ -354,7 +354,7 @@ public abstract class Mat<T extends Mat<T, T2>, T2 extends Mat<?, ?>> implements
 	}
 	
 	public void writeToGL(ByteBuffer byteBuffer) {
-		writeTo(byteBuffer.asDoubleBuffer());
+		writeToGL(byteBuffer.asDoubleBuffer());
 	}
 
 	public void writeToGL(DoubleBuffer doubleBuffer) {
