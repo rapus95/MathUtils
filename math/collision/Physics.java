@@ -75,6 +75,29 @@ public class Physics {
 			return bp;
 		return null;
 	}
+	
+	public static Vec3 getNormal(Vec3 p1, Vec3 p2, Vec3 p3) {
+
+		Vec3 o = p1;
+		Vec3 s = p2.sub(o);
+		Vec3 t = p3.sub(o);
+		double dot = s.dot(t);
+		if (dot != 0) {
+			o = p3;
+			s = p2.sub(o);
+			t = p1.sub(o);
+			dot = s.dot(t);
+		}
+		if (dot != 0) {
+			o = p2;
+			s = p3.sub(o);
+			t = p1.sub(o);
+			dot = s.dot(t);
+		}
+		if (dot != 0)
+			System.out.println("Warning, not orthogonal axes, dot:" + dot);
+		return s.cross(t);
+	}
 
 //	public static double intersectionPos(Vec2 gAp1, Vec2 gAp2, Vec2 gBp1, Vec2 gBp2) {
 //		double x1 = gAp1.x(), x2 = gAp2.x(), x3 = gBp1.x(), x4 = gBp2.x();
