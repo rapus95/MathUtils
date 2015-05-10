@@ -478,6 +478,13 @@ public abstract class Vec<T extends Vec<T>> implements Iterable<Double>, Cloneab
 		}
 		return true;
 	}
+	
+	
+	public T projectOnto(T projectionAxis){
+		return projectionAxis.mul(this.dot(projectionAxis)/dot(projectionAxis, projectionAxis));
+	}
+	
+	//TODO add new functionalities right above here
 
 	@Override
 	public abstract T clone();
